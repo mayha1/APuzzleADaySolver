@@ -1,0 +1,3 @@
+24/1/2023
+- Mở rộng bảng để xử lí những trường hợp ngoài rìa
+- Sử dụng chỉ số âm để xử lí những trường hợp ngoài rìa
