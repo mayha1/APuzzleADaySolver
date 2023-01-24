@@ -16,7 +16,6 @@ MA1 = np.array([
 ])
 for i in range(BOARDSIZE[0]):
     model.addConstr(A1Vars[i, 1] == 0)
-# model.addConstr(A1Vars.sum() == 1)
 
 # A2 vars
 A2Vars = model.addMVar(lb=0, ub=1, shape=BOARDSIZE,
