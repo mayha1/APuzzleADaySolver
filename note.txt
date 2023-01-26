@@ -1,3 +1,7 @@
-24/1/2023
+24/01/2023
 - Mở rộng bảng để xử lí những trường hợp ngoài rìa
 - Sử dụng chỉ số âm để xử lí những trường hợp ngoài rìa
+26/01/2023
+- Mỗi mảnh (với cách xoay cố định) viết vào một hàm 
+    (input: model, output: ma trận M, ví dụ: MA1)
+- Xử lí các trường hợp rìa
