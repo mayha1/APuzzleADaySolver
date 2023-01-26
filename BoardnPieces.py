@@ -90,22 +90,22 @@ LShape4 = np.array([[0, 0, 0, 1],
                     [1, 1, 1, 1]], np.int_)
 
 LShape5 = np.array([[1, 1],
-                    [1, 0]
+                    [1, 0],
                     [1, 0],
                     [1, 0]], np.int_)
 
 LShape6 = np.array([[1, 0],
-                    [1, 0]
+                    [1, 0],
                     [1, 0],
                     [1, 1]], np.int_)
 
 LShape7 = np.array([[1, 1],
-                    [0, 1]
+                    [0, 1],
                     [0, 1],
                     [0, 1]], np.int_)
 
 LShape8 = np.array([[0, 1],
-                    [0, 1]
+                    [0, 1],
                     [0, 1],
                     [1, 1]], np.int_)
 
@@ -123,22 +123,22 @@ JShape4 = np.array([[0, 0, 1, 0],
                     [1, 1, 1, 1]], np.int_)
 
 JShape5 = np.array([[1, 0],
-                    [1, 1]
+                    [1, 1],
                     [1, 0],
                     [1, 0]], np.int_)
 
 JShape6 = np.array([[1, 0],
-                    [1, 0]
+                    [1, 0],
                     [1, 1],
                     [1, 0]], np.int_)
 
 JShape7 = np.array([[0, 1],
-                    [0, 1]
+                    [0, 1],
                     [1, 1],
                     [0, 1]], np.int_)
 
 JShape8 = np.array([[0, 1],
-                    [1, 1]
+                    [1, 1],
                     [0, 1],
                     [0, 1]], np.int_)
 
@@ -156,22 +156,22 @@ ZShape4 = np.array([[0, 0, 1, 1],
                     [1, 1, 1, 0]], np.int_)
 
 ZShape5 = np.array([[1, 0],
-                    [1, 0]
+                    [1, 0],
                     [1, 1],
                     [0, 1]], np.int_)
 
 ZShape6 = np.array([[0, 1],
-                    [1, 1]
+                    [1, 1],
                     [1, 0],
                     [1, 0]], np.int_)
 
 ZShape7 = np.array([[0, 1],
-                    [0, 1]
+                    [0, 1],
                     [1, 1],
                     [1, 0]], np.int_)
 
 ZShape8 = np.array([[1, 0],
-                    [1, 1]
+                    [1, 1],
                     [0, 1],
                     [0, 1]], np.int_)
 

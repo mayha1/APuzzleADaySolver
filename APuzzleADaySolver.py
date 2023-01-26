@@ -2,37 +2,8 @@ import gurobipy as gb
 import numpy as np
 from gurobipy import GRB
 import math
+from BoardnPieces import piecesDict, initBoard
 
-
-INITBOARD = np.array([[1, 1, 1, 1, 1, 1, 0],
-              [1, 1, 1, 1, 1, 1, 0],
-              [1, 1, 1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1, 1, 1],
-              [1, 1, 1, 0, 0, 0, 0]], np.int_)
-
-rec1 = np.array([[1,1,1],
-                [1,1,1]], np.int_)
-
-rec2 = np.array([[1,1],
-                 [1,1],
-                 [1,1]], np.int_)
-
-Tshape1 = np.array([[0, 1, 0],
-                   [1, 1, 1]], np.int_)
-# 0: no piece
-# 1: piece
-
-pieceList = {
-    'rec': {
-        'rec1': rec1,
-        'rec2': rec2,
-    },
-    'Tshape': {
-        'Tshape1': Tshape1
-    }
-}
 
 def boardSizeNPArrMLinExpr():
     arr = np.empty(shape=board.shape, dtype=gb.MLinExpr)
@@ -40,7 +11,7 @@ def boardSizeNPArrMLinExpr():
     return arr
 
 def inp():
-    board = INITBOARD
+    board = initBoard
     print('Input day number: ')
     day = int(input())
     board[math.floor((day-1)/7+2), (day-1)%7] = 0
@@ -52,7 +23,8 @@ def inp():
 def getCoverMat(model, piece, pieceName):
     ULCPos = model.addMVar(lb=0, ub=1, shape=board.shape,
                       vtype=GRB.INTEGER, name=pieceName+'Var')
-    # a[i, j] == 1 means the upper left conner (ulc) lies on [i, j]
+    # ULCPos[i, j] == 1 means the upper left conner (ulc) lies on [i, j]
+    
     coverMat = boardSizeNPArrMLinExpr()
     # CoverMat[i, j] == 1 means [i, j] contained in the piece
 
@@ -72,11 +44,13 @@ if __name__=="__main__":
     board = inp()
     model = gb.Model()
     sumCover = boardSizeNPArrMLinExpr()
-    for pieceName in pieceList:
+    for pieceName in piecesDict:
         sumULCPos = boardSizeNPArrMLinExpr()
-        thisPieceDict = pieceList[pieceName]
+        thisPieceDict = piecesDict[pieceName]
         for pieceRotatedName in thisPieceDict:
-            coverMat, ULCPos = getCoverMat(model, thisPieceDict[pieceRotatedName], pieceRotatedName)
+            coverMat, ULCPos = getCoverMat(model,
+                                           thisPieceDict[pieceRotatedName],
+                                           pieceRotatedName)
             sumCover += coverMat
             sumULCPos += ULCPos
         model.addConstr(sumULCPos.sum() <= 1)
@@ -90,5 +64,3 @@ if __name__=="__main__":
     
     model.update()
     model.optimize()
-    print('*********************Covering:********************')
-    print(sumCover)
