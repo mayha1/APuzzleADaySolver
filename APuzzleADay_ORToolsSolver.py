@@ -69,10 +69,10 @@ if __name__=="__main__":
     sumCover = boardSizeNPArrMLinExpr()
     for pieceName in piecesDict:
         sumULCPos = boardSizeNPArrMLinExpr()
-        thisPieceDict = piecesDict[pieceName]
-        for pieceRotatedName in thisPieceDict:
+        pieceRotationsDict = piecesDict[pieceName]
+        for pieceRotatedName in pieceRotationsDict:
             coverMat, ULCPos = getCoverMatAndULCPos(model,
-                                                    thisPieceDict[pieceRotatedName],
+                                                    pieceRotationsDict[pieceRotatedName],
                                                     pieceRotatedName)
             sumCover += coverMat
             sumULCPos += ULCPos
@@ -91,8 +91,8 @@ if __name__=="__main__":
     status = solver.Solve(model)
     if status == cp_model.FEASIBLE or status == cp_model.OPTIMAL:
         for pieceName in piecesDict:
-            thisPieceDict = piecesDict[pieceName]
-            for pieceRotatedName in thisPieceDict:
+            pieceRotationsDict = piecesDict[pieceName]
+            for pieceRotatedName in pieceRotationsDict:
                 used = checkIfUsed(pieceRotatedName, board, solver)
                 if used:
                     printPiece(pieceRotatedName, board, solver)
