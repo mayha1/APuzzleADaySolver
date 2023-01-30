@@ -97,7 +97,7 @@ if __name__=="__main__":
                                 solution[i][j] = count
             count += 1
         # Visualize solution
-        sns.heatmap(solution, cmap='Greens', cbar=False, linewidth = 0.5, 
+        sns.heatmap(solution, cmap='Reds', cbar=False, linewidth = 0.5, 
                     square=True, xticklabels=False, yticklabels=False)
         plt.show()
     else:
