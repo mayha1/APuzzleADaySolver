@@ -16,21 +16,22 @@ OShape2 = np.array([[1, 1],
                     [1, 1],
                     [1, 1]], np.int_)
 
-# TShape
-TShape1 = np.array([[1, 1, 1],
-                    [0, 1, 0]], np.int_)
+# bigZShape
+bigZShape1 = np.array([[1, 1, 0],
+                       [0, 1, 0],
+                       [0, 1, 1]], np.int_)
 
-TShape2 = np.array([[0, 1, 0],
-                    [1, 1, 1]], np.int_)
+bigZShape2 = np.array([[0, 1, 1],
+                       [0, 1, 0],
+                       [1, 1, 0]], np.int_)
 
-TShape3 = np.array([[1, 0],
-                    [1, 1] ,
-                    [1, 0]], np.int_) 
+bigZShape3 = np.array([[1, 0, 0],
+                       [1, 1, 1],
+                       [0, 0, 1]], np.int_)
 
-TShape4 = np.array([[0, 1],
-                    [1, 1],
-                    [0, 1]], np.int_)
-
+bigZShape4 = np.array([[0, 0, 1],
+                       [1, 1, 1],
+                       [1, 0, 0]], np.int_)
 
 # UShape
 UShape1 = np.array([[1, 1, 1],
@@ -198,12 +199,12 @@ piecesDict = {
             'OShape1': OShape1,
             'OShape2': OShape2
             },
-    'TShape':
+    'bigZShape':
         {
-            'TShape1': TShape1,
-            'TShape2': TShape2,
-            'TShape3': TShape3,
-            'TShape4': TShape4
+            'bigZShape1': bigZShape1,
+            'bigZShape2': bigZShape2,
+            'bigZShape3': bigZShape3,
+            'bigZShape4': bigZShape4
             },
     'UShape':
         {

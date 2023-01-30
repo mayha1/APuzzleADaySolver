@@ -64,7 +64,7 @@ def printPiece(name, board, solver):
 
 
 if __name__=="__main__":
-    board = inp(smallerSize=True)
+    board = inp(smallerSize=False)
     model = cp_model.CpModel()
     sumCover = boardSizeNPArrMLinExpr()
     for pieceName in piecesDict:
