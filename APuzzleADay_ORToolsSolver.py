@@ -1,8 +1,11 @@
+import matplotlib.pyplot as plt
 from ortools.sat.python import cp_model
+import seaborn as sns
 import numpy as np
 import math
 from BoardnPieces import piecesDict, initBoard
 
+visualSymbols = ['*', '+', '@', '~', '&', '-', '=', '%']
 coverMatDict = {}
 
 
@@ -37,10 +40,10 @@ def getCoverMatAndULCPos(model, piece, pieceName):
 
     for i in range(initBoard.shape[0] - piece.shape[0] + 1):
         for j in range(initBoard.shape[1] - piece.shape[1] + 1):
-            # loop all posible position of upper left square of the piece
+            # Loop all posible position of upper left square of the piece
             for u in range(piece.shape[0]):
                 for v in range(piece.shape[1]):
-                    # loop all squares in the piece
+                    # Loop all squares in the piece
                     if piece[u, v] == 1:
                         coverMat[i+u, j+v] += ULCPos[i, j]
     coverMatDict[f'{pieceName}CoverMat'] = coverMat
@@ -53,14 +56,6 @@ def isUsed(name, board, solver):
             if solver.Value(coverMatDict[f'{name}CoverMat'][i, j]):
                 return True
     return False
-
-
-def printPiece(name, board, solver):
-    print(name)
-    for i in range(board.shape[0]):
-        for j in range(board.shape[1]):
-            print(solver.Value(coverMatDict[f'{name}CoverMat'][i, j]), end=" ")
-        print()
 
 
 if __name__=="__main__":
@@ -81,7 +76,7 @@ if __name__=="__main__":
 
     for i in range(board.shape[0]):
         for j in range(board.shape[1]):
-            # every needed square is covered, otherwise non
+            # Every needed square is covered, otherwise non
             if board[i, j] == 1:
                 model.Add(sumCover[i, j] == 1)
             else:
@@ -90,10 +85,20 @@ if __name__=="__main__":
     solver = cp_model.CpSolver()
     status = solver.Solve(model)
     if status == cp_model.FEASIBLE or status == cp_model.OPTIMAL:
+        count = 1
+        solution = np.zeros(shape=initBoard.shape)
         for pieceName in piecesDict:
             pieceRotationsDict = piecesDict[pieceName]
             for pieceRotation in pieceRotationsDict:
                 if isUsed(pieceRotation, board, solver):
-                    printPiece(pieceRotation, board, solver)
+                    for i in range(board.shape[0]):
+                        for j in range(board.shape[1]):
+                            if solver.Value(coverMatDict[f'{pieceRotation}CoverMat'][i, j]) == 1:
+                                solution[i][j] = count
+            count += 1
+        # Visualize solution
+        sns.heatmap(solution, cmap='Greens', cbar=False, linewidth = 0.5, 
+                    square=True, xticklabels=False, yticklabels=False)
+        plt.show()
     else:
         print(f'status code: {status} - {solver.StatusName(status)}')
