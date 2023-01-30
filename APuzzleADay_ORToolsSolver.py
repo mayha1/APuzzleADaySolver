@@ -70,10 +70,10 @@ if __name__=="__main__":
     for pieceName in piecesDict:
         sumULCPos = boardSizeNPArrMLinExpr()
         pieceRotationsDict = piecesDict[pieceName]
-        for pieceRotatedName in pieceRotationsDict:
+        for pieceRotation in pieceRotationsDict:
             coverMat, ULCPos = getCoverMatAndULCPos(model,
-                                                    pieceRotationsDict[pieceRotatedName],
-                                                    pieceRotatedName)
+                                                    pieceRotationsDict[pieceRotation],
+                                                    pieceRotation)
             sumCover += coverMat
             sumULCPos += ULCPos
         model.Add(sumULCPos.sum() <= 1)
@@ -92,9 +92,9 @@ if __name__=="__main__":
     if status == cp_model.FEASIBLE or status == cp_model.OPTIMAL:
         for pieceName in piecesDict:
             pieceRotationsDict = piecesDict[pieceName]
-            for pieceRotatedName in pieceRotationsDict:
-                used = checkIfUsed(pieceRotatedName, board, solver)
+            for pieceRotation in pieceRotationsDict:
+                used = checkIfUsed(pieceRotation, board, solver)
                 if used:
-                    printPiece(pieceRotatedName, board, solver)
+                    printPiece(pieceRotation, board, solver)
     else:
         print(f'status code: {status} - {solver.StatusName(status)}')
