@@ -47,7 +47,7 @@ def getCoverMatAndULCPos(model, piece, pieceName):
     return coverMat, ULCPos
 
 
-def checkIfUsed(name, board, solver):
+def isUsed(name, board, solver):
     for i in range(board.shape[0]):
         for j in range(board.shape[1]):
             if solver.Value(coverMatDict[f'{name}CoverMat'][i, j]):
@@ -93,8 +93,7 @@ if __name__=="__main__":
         for pieceName in piecesDict:
             pieceRotationsDict = piecesDict[pieceName]
             for pieceRotation in pieceRotationsDict:
-                used = checkIfUsed(pieceRotation, board, solver)
-                if used:
+                if isUsed(pieceRotation, board, solver):
                     printPiece(pieceRotation, board, solver)
     else:
         print(f'status code: {status} - {solver.StatusName(status)}')
